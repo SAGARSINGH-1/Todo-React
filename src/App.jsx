@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Header from './Components/Header'
 import Home from './Components/Home'
-import AddList from './AddList';
+import AddList from './Components/AddList';
 function App() {
 
   const [todos, setTodos] = useState(true)
@@ -15,7 +15,7 @@ function App() {
       <div className='mt-[70px]'>
         <Home />
       </div>
-      <div className={`text-5xl absolute top-[50%] left-[50%] ${todos?"hidden" :""} `}>
+      <div className={`text-5xl absolute top-[22%] left-[30%] ${todos?"hidden" :""} `}>
         <AddList/>
       </div>
     </div>
