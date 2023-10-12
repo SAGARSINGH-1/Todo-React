@@ -1,25 +1,39 @@
-import { useState } from 'react'
-import Header from './Components/Header'
-import Home from './Components/Home'
+// App.jsx
+import React, { useEffect, useState } from 'react';
+import Header from './Components/Header';
+import Home from './Components/Home';
 import AddList from './Components/AddList';
-function App() {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-  const [todos, setTodos] = useState(true)
+
+function App() {
+  const [todos, setTodos] = useState(true);
   const toggleTodos = () => {
     setTodos(!todos);
   };
 
+  const [data, setData] = useState([]); // Add a state to store the data
+
+  useEffect(() => {
+    setTodos(true)
+    if (data.length > 0) {
+      toast.success('Added Successfully')
+    }
+  }, [data])
+
   return (
-    <div className='relative h-[100vh] overflow-y-scroll'>
+    <div className="relative h-[100vh] overflow-y-scroll">
+      <ToastContainer position="bottom-right" autoClose={2000}/>
       <Header todos={todos} toggleTodos={toggleTodos} />
-      <div className='mt-[70px]'>
-        <Home />
+      <div className="mt-[70px]">
+        <Home data={data} setData={setData} /> {/* Pass data and setData as props */}
       </div>
-      <div className={`text-5xl absolute top-[22%] left-[30%] ${todos?"hidden" :""} `}>
-        <AddList/>
+      <div className={`text-5xl absolute top-[22%] left-[30%] ${todos ? 'hidden' : ''}`}>
+        <AddList setData={setData} /> {/* Pass setData as a prop to AddList */}
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

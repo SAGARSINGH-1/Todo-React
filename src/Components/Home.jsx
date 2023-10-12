@@ -1,33 +1,17 @@
 import React, { useState } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
 
-function Home() {
-    const [items, setItems] = useState([
-        {
-            id: 1,
-            title: 'This is title 1',
-            description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-            checked: false,
-        },
-        {
-            id: 2,
-            title: 'This is title 2',
-            description: 'Exercitationem quo eligendi quam placeat quisquam delectus nisi voluptatum doloremque porro error.',
-            checked: false,
-        },
-        // Add more items as needed
-    ]);
-
-    function toggleCheck(id) {
-        setItems((prevItems) =>
-            prevItems.map((item) => {
-                if (item.id === id) {
-                    return { ...item, checked: !item.checked };
-                }
-                return item;
-            })
+function Home({data,setData}) {
+    const toggleCheck = (id) => {
+        setData((prevData) =>
+          prevData.map((item) => {
+            if (item.id === id) {
+              return { ...item, checked: !item.checked };
+            }
+            return item;
+          })
         );
-    }
+      };
 
     return (
         <div className="flex gap-3">
@@ -42,13 +26,13 @@ function Home() {
                     <img className='text-center w-28' src="./public/man_4140048.png" alt="Profile" />
                 </div>
             </div>
-            {/* ... Your left side content ... */}
+            {/* ... Your right side content ... */}
             <div className="cursor-pointer flex justify-center items-center bottom-8 left-10 fixed">
                 <img className="text-center w-28" src="./public/man_4140048.png" alt="Profile" />
             </div>
             {/* Right Box */}
             <div className="flex flex-wrap w-[100%] mt-[60px] gap-4 pl-4 overflow-y-auto flex-grow">
-                {items.map((item) => (
+                {data.map((item) => (
                     <div key={item.id} className="w-[47%] bg-yellow-200 h-min p-4 rounded-xl">
                         <div className="flex justify-between mt-3">
                             <h1 className={`text-2xl font-semibold ${item.checked ? 'line-through' : ''}`}>
