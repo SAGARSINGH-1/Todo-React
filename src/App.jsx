@@ -1,5 +1,5 @@
 // App.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from './Components/Header';
 import Home from './Components/Home';
 import AddList from './Components/AddList';
@@ -18,9 +18,9 @@ function App() {
   useEffect(() => {
     setTodos(true)
     if (data.length > 0) {
-      toast.success('Added Successfully')
+      toast.success('Updated Todo Successfully')
     }
-  }, [data])
+  }, [data.length])
 
   return (
     <div className="relative h-[100vh] overflow-y-scroll">
@@ -30,7 +30,7 @@ function App() {
         <Home data={data} setData={setData} /> {/* Pass data and setData as props */}
       </div>
       <div className={`text-5xl absolute top-[22%] left-[30%] ${todos ? 'hidden' : ''}`}>
-        <AddList setData={setData} /> {/* Pass setData as a prop to AddList */}
+        <AddList setData={setData} toggleTodos={toggleTodos}/> {/* Pass setData as a prop to AddList */}
       </div>
     </div>
   );

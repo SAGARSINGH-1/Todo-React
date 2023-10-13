@@ -3,8 +3,12 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from 'react-toastify';
 
-function AddList({ setData }) {
+function AddList({ setData, toggleTodos }) {
     const [selectedDate, setSelectedDate] = React.useState(null);
+    const [work, setWork] = React.useState(false);
+    const [study, setStudy] = React.useState(false);
+    const [entertainment, setEntertainment] = React.useState(false);
+    const [family, setFamily] = React.useState(false);
 
     function submitHandler(e) {
         e.preventDefault();
@@ -12,17 +16,43 @@ function AddList({ setData }) {
         const description = e.target.description.value;
         const deadline = selectedDate;
 
-        if (title && description && deadline) {
+        if (title && description ) {
             const newData = {
                 id: Math.random(),
                 title: title,
                 description: description,
                 deadline: deadline,
                 checked: false,
+                work: work,
+                study: study,
+                entertainment: entertainment,
+                family: family
             };
 
             // Update the parent component's data
             setData((prevData) => [...prevData, newData]);
+            toggleTodos()
+        }else{
+            toast.warn('Please fill in all fields.')
+        }
+    }
+    function Filter(value) {
+        // Determine which filter to toggle based on the provided value
+        switch (value) {
+            case 'work':
+                setWork(!work);
+                break;
+            case 'study':
+                setStudy(!study);
+                break;
+            case 'entertainment':
+                setEntertainment(!entertainment);
+                break;
+            case 'family':
+                setFamily(!family);
+                break;
+            default:
+                break;
         }
     }
 
@@ -61,6 +91,12 @@ function AddList({ setData }) {
                         placeholder='Enter the Description'
                         className='w-full h-32 px-3 py-2 rounded border focus:outline-none focus:ring focus:border-sky-500'
                     />
+                </div>
+                <div className="flex gap-1">
+                    <p onClick={() => Filter('work')} className={`cursor-pointer w-8 h-8 bg-purple-400 ${work ? 'border-[1px] border-black' : ''} rounded-full`}></p>
+                    <p onClick={() => Filter('study')} className={`cursor-pointer w-8 h-8 bg-sky-300 ${study ? 'border-[1px] border-black' : ''} rounded-full`}></p>
+                    <p onClick={() => Filter('entertainment')} className={`cursor-pointer w-8 h-8 bg-pink-300 ${entertainment ? 'border-[1px] border-black' : ''} rounded-full`}></p>
+                    <p onClick={() => Filter('family')} className={`cursor-pointer w-8 h-8 bg-red-600 ${family ? 'border-[1px] border-black' : ''} rounded-full`}></p>
                 </div>
                 <button
                     type='submit'
