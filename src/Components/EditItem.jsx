@@ -4,10 +4,14 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from 'react-toastify';
 
-function EditItem({ item, onSave, onCancel }) {
+function EditItem({ item, onSave, onCancel, work, study, entertainment, family }) {
   const [selectedDate, setSelectedDate] = useState(item.deadline);
   const [title, setTitle] = useState(item.title);
   const [description, setDescription] = useState(item.description);
+  const [workFilter, setWorkFilter] = useState(item.work);
+  const [studyFilter, setStudyFilter] = useState(item.study);
+  const [entertainmentFilter, setEntertainmentFilter] = useState(item.entertainment);
+  const [familyFilter, setFamilyFilter] = useState(item.family);
 
   function handleSave() {
     if (title && description && selectedDate) {
@@ -16,6 +20,10 @@ function EditItem({ item, onSave, onCancel }) {
         title,
         description,
         deadline: selectedDate,
+        work: workFilter,
+        study: studyFilter,
+        entertainment: entertainmentFilter,
+        family: familyFilter,
       });
       toast.success('Task Updated Successfully');
       onCancel();
@@ -69,6 +77,24 @@ function EditItem({ item, onSave, onCancel }) {
             onChange={(e) => setDescription(e.target.value)}
             className="w-full h-32 px-3 py-2 rounded border focus:outline-none focus:ring focus:border-sky-500"
           />
+        </div>
+        <div className="flex gap-1">
+          <p
+            onClick={() => setWorkFilter(!workFilter)}
+            className={`cursor-pointer w-8 h-8 bg-purple-400 ${workFilter ? 'border-[1px] border-black' : ''} rounded-full`}
+          ></p>
+          <p
+            onClick={() => setStudyFilter(!studyFilter)}
+            className={`cursor-pointer w-8 h-8 bg-sky-300 ${studyFilter ? 'border-[1px] border-black' : ''} rounded-full`}
+          ></p>
+          <p
+            onClick={() => setEntertainmentFilter(!entertainmentFilter)}
+            className={`cursor-pointer w-8 h-8 bg-pink-300 ${entertainmentFilter ? 'border-[1px] border-black' : ''} rounded-full`}
+          ></p>
+          <p
+            onClick={() => setFamilyFilter(!familyFilter)}
+            className={`cursor-pointer w-8 h-8 bg-red-600 ${familyFilter ? 'border-[1px] border-black' : ''} rounded-full`}
+          ></p>
         </div>
         <button
           type="button"
