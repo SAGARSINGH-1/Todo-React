@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
-  const [todos, setTodos] = useState(true);
+  const [todos, setTodos] = useState(false);
   const toggleTodos = () => {
     setTodos(!todos);
   };
@@ -29,7 +29,7 @@ function App() {
       <div className="mt-[70px]">
         <Home data={data} setData={setData} /> {/* Pass data and setData as props */}
       </div>
-      <div className={`text-5xl absolute top-[22%] left-[30%] ${todos ? 'hidden' : ''}`}>
+      <div className={`text-5xl absolute top-[20%] left-[32%] ${todos ? 'hidden' : ''}`}>
         <AddList setData={setData} toggleTodos={toggleTodos}/> {/* Pass setData as a prop to AddList */}
       </div>
     </div>

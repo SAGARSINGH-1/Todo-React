@@ -1,4 +1,3 @@
-// Home.js
 import React, { useEffect, useState } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
 import EditItem from './EditItem';
@@ -15,6 +14,7 @@ function Home({ data, setData }) {
   const [done, setDone] = useState(true);
   const [none, setNone] = useState(false);
   const [all, setAll] = useState(false);
+  const [openedItemId, setOpenedItemId] = useState(null); // Keep track of opened item
 
   const toggleCheck = (id) => {
     setData((prevData) =>
@@ -32,6 +32,13 @@ function Home({ data, setData }) {
       ...prevState,
       [id]: !prevState[id],
     }));
+
+    // Open or close edit panel for the clicked item
+    if (openedItemId !== id) {
+      setOpenedItemId(id);
+    } else {
+      setOpenedItemId(null);
+    }
   };
 
   const startEditing = (item) => {
@@ -47,6 +54,7 @@ function Home({ data, setData }) {
     });
 
     setData(updatedData);
+    setOpenedItemId(null); // Close the edit panel
   };
 
   const deleteTodo = (id) => {
@@ -61,6 +69,7 @@ function Home({ data, setData }) {
       progress: undefined,
       theme: "colored",
     });
+    setOpenedItemId(null); // Close the delete panel
   };
 
   function filterApply(value) {
@@ -136,8 +145,7 @@ function Home({ data, setData }) {
       (study && item.study && !item.checked) ||
       (entertainment && item.entertainment && !item.checked) ||
       (family && item.family && !item.checked) ||
-      (done && item.checked) ||
-      (data)
+      (done && item.checked) 
     );
   });
 
@@ -149,15 +157,16 @@ function Home({ data, setData }) {
       {/* ... Your other components ... */}
       <div id='active' className='flex flex-col w-[388px] p-5 max-h-max justify-between'>
         <div className='p-2 flex flex-col justify-center h-[68vh] text-3xl gap-8 fixed'>
-          <div onClick={() => filterApply('work')} className={`cursor-pointer flex items-center gap-2 py-2 px-2 transition-all ease-in-out ${work && all ? "bg-gray-200 scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-purple-400 rounded-full'> </p> Work</div>
-          <div onClick={() => filterApply('study')} className={`cursor-pointer flex items-center gap-2 py-2 px-2 transition-all ease-in-out ${study && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-sky-300 rounded-full'> </p>study</div>
-          <div onClick={() => filterApply('entertainment')} className={`cursor-pointer flex items-center gap-2 py-2 px-2 transition-all ease-in-out ${entertainment && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-pink-300 rounded-full'> </p>entertainment</div>
-          <div onClick={() => filterApply('family')} className={`cursor-pointer flex items-center gap-2 py-2 px-2 transition-all ease-in-out ${family && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-red-600 rounded-full'> </p>family</div>
-          <div onClick={() => filterApply('all')} className={`cursor-pointer flex items-center gap-2 py-2 px-2 transition-all ease-in-out rounded-3xl ${!all ? "bg-gray-200  scale-110" : ""}`}><p className='inline-block w-8 h-8 bg-gray-600 rounded-full'> </p>All</div>
-          <div onClick={() => filterApply('done')} className={`cursor-pointer flex items-center gap-2 py-2 px-2 transition-all ease-in-out ${done && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-green-500 rounded-full'> </p>Done</div>
+          <div onClick={() => filterApply('work')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${work && all ? "bg-gray-200 scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-purple-400 rounded-full'> </p> Work</div>
+          <div onClick={() => filterApply('study')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${study && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-sky-300 rounded-full'> </p>study</div>
+          <div onClick={() => filterApply('entertainment')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${entertainment && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-pink-300 rounded-full'> </p>entertainment</div>
+          <div onClick={() => filterApply('family')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${family && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-red-600 rounded-full'> </p>family</div>
+          <div onClick={() => filterApply('all')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 rounded-3xl ${!all ? "bg-gray-200  scale-110" : ""}`}><p className='inline-block w-8 h-8 bg-gray-600 rounded-full'> </p>All</div>
+          <div onClick={() => filterApply('done')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${done && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-green-500 rounded-full'> </p>Done</div>
         </div>
-        <div className='cursor-pointer flex justify-center items-center bottom-8 left-10 fixed'>
-          <img className='text-center w-28' src="./public/man_4140048.png" alt="Profile" />
+        <div className='selection:bg-none cursor-pointer flex gap-3 justify-center items-center bottom-8 left-10 fixed'>
+          <img className='text-center w-[3rem]' src="./public/man_4140048.png" alt="Profile" />
+          <h1 className='text-xl font-semibold'>User1234</h1>
         </div>
       </div>
       <div className="flex flex-wrap w-[100%] mt-[60px] gap-4 pl-4 overflow-y-auto flex-grow">
@@ -167,21 +176,29 @@ function Home({ data, setData }) {
               <h1 className={`text-2xl font-semibold ${item.checked ? 'line-through' : ''}`}>
                 {item.title}
               </h1>
-              <BsThreeDots onClick={() => toggleEdit(item.id)} className={`text-2xl cursor-pointer`} />
-              {editState[item.id] && (
+              <BsThreeDots onClick={() => toggleEdit(item.id)} className={`text-2xl selection:bg-none cursor-pointer`} />
+              {editState[item.id] && openedItemId === item.id && (
                 <div className="bg-white absolute right-3 top-5 w-[100px] rounded-sm">
                   <p onClick={() => startEditing(item)} className='cursor-pointer hover:bg-gray-300 px-[10px] py-1 selection:bg-none'>Edit</p>
-                  <p onClick={() => deleteTodo(item.id)} className='cursor-pointer hover:bg-gray-300 px-[10px] py-1 selection:bg-none'>Delete</p>
+                  <p onClick={() => deleteTodo(item.id)} className='selection:bg-none cursor-pointer hover-bg-gray-300 px-[10px] py-1 selection-bg-none'>Delete</p>
                 </div>
               )}
             </div>
-            <div className={`py-4 ${item.checked ? 'line-through' : ''}`}>{item.description}</div>
+            <div className={`py-4 ${item.checked ? 'line-through' : ''} `}>
+              <div className="">
+                {item.description}
+              </div>
+            </div>
+
             <div className="flex justify-between mt-3">
               <div className="flex gap-1">
-                <p className={`cursor-pointer w-8 h-8 bg-purple-400 rounded-full ${item.work ? "" : "hidden"}`}></p>
-                <p className={`cursor-pointer w-8 h-8 bg-sky-300 rounded-full ${item.study ? "" : "hidden"}`}></p>
-                <p className={`cursor-pointer w-8 h-8 bg-pink-300 rounded-full ${item.entertainment ? "" : "hidden"}`}></p>
-                <p className={`cursor-pointer w-8 h-8 bg-red-600 rounded-full ${item.family ? "" : "hidden"}`}></p>
+                <p title='work' className={`selection:bg-none cursor-pointer w-8 h-8 bg-purple-400 rounded-full ${item.work ? "" : "hidden"}`}></p>
+                <p title='study' className={`selection:bg-none cursor-pointer w-8 h-8 bg-sky-300 rounded-full ${item.study ? "" : "hidden"}`}></p>
+                <p title='entertainment' className={`selection:bg-none cursor-pointer w-8 h-8 bg-pink-300 rounded-full ${item.entertainment ? "" : "hidden"}`}></p>
+                <p title='family' className={`selection:bg-none cursor-pointer w-8 h-8 bg-red-600 rounded-full ${item.family ? "" : "hidden"}`}></p>
+              </div>
+              <div>
+              {item.deadline ? new Date(item.deadline).toLocaleString() : "N/A"}
               </div>
               <div onClick={() => toggleCheck(item.id)} className="flex items-center">
                 <span className="cursor-pointer text-xl mb-1 selection:bg-none">Done</span>
@@ -196,15 +213,13 @@ function Home({ data, setData }) {
       {editingItem && (
         <EditItem
           item={editingItem}
-          onSave={saveEdit}
+          onSave={(updatedItem) => {
+            saveEdit(updatedItem);
+            setEditingItem(null);
+          }}
           onCancel={() => setEditingItem(null)}
-          work={work}
-          study={study}
-          entertainment={entertainment}
-          family={family}
         />
       )}
-
     </div>
   );
 }
