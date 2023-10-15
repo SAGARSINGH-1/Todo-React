@@ -156,7 +156,7 @@ function Home({ data, setData }) {
     <div className="flex gap-3">
       {/* ... Your other components ... */}
       <div id='active' className='flex flex-col w-[388px] p-5 max-h-max justify-between'>
-        <div className='p-2 flex flex-col justify-center h-[68vh] text-2xl gap-5 fixed'>
+        <div className='p-2 flex flex-col justify-center h-[68vh] text-xl gap-4 fixed'>
           <div onClick={() => filterApply('work')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${work && all ? "bg-gray-200 scale-105" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-purple-400 rounded-full'> </p> Work</div>
           <div onClick={() => filterApply('study')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${study && all ? "bg-gray-200  scale-105" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-sky-300 rounded-full'> </p>study</div>
           <div onClick={() => filterApply('entertainment')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${entertainment && all ? "bg-gray-200  scale-105" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-pink-300 rounded-full'> </p>entertainment</div>
