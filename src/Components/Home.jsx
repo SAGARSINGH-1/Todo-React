@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
 import EditItem from './EditItem';
 import { toast } from 'react-toastify';
-import None from '../None';
+import None from './None';
 
 function Home({ data, setData }) {
   const [editState, setEditState] = useState({});
