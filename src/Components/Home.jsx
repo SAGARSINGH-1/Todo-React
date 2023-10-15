@@ -165,7 +165,7 @@ function Home({ data, setData }) {
           <div onClick={() => filterApply('done')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${done && all ? "bg-gray-200  scale-105" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-green-500 rounded-full'> </p>Done</div>
         </div>
         <div className='selection:bg-none cursor-pointer flex gap-3 justify-center items-center bottom-8 left-10 fixed'>
-          <img className='text-center w-[3rem]' src="./public/man_4140048.png" alt="Profile" />
+          <img className='text-center w-[3rem]' src="./man_4140048.png" alt="Profile" />
           <h1 className='text-xl font-semibold'>User1234</h1>
         </div>
       </div>
