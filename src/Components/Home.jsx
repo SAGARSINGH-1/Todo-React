@@ -156,13 +156,13 @@ function Home({ data, setData }) {
     <div className="flex gap-3">
       {/* ... Your other components ... */}
       <div id='active' className='flex flex-col w-[388px] p-5 max-h-max justify-between'>
-        <div className='p-2 flex flex-col justify-center h-[68vh] text-3xl gap-8 fixed'>
-          <div onClick={() => filterApply('work')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${work && all ? "bg-gray-200 scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-purple-400 rounded-full'> </p> Work</div>
-          <div onClick={() => filterApply('study')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${study && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-sky-300 rounded-full'> </p>study</div>
-          <div onClick={() => filterApply('entertainment')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${entertainment && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-pink-300 rounded-full'> </p>entertainment</div>
-          <div onClick={() => filterApply('family')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${family && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-red-600 rounded-full'> </p>family</div>
-          <div onClick={() => filterApply('all')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 rounded-3xl ${!all ? "bg-gray-200  scale-110" : ""}`}><p className='inline-block w-8 h-8 bg-gray-600 rounded-full'> </p>All</div>
-          <div onClick={() => filterApply('done')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${done && all ? "bg-gray-200  scale-110" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-green-500 rounded-full'> </p>Done</div>
+        <div className='p-2 flex flex-col justify-center h-[68vh] text-2xl gap-5 fixed'>
+          <div onClick={() => filterApply('work')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${work && all ? "bg-gray-200 scale-105" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-purple-400 rounded-full'> </p> Work</div>
+          <div onClick={() => filterApply('study')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${study && all ? "bg-gray-200  scale-105" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-sky-300 rounded-full'> </p>study</div>
+          <div onClick={() => filterApply('entertainment')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${entertainment && all ? "bg-gray-200  scale-105" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-pink-300 rounded-full'> </p>entertainment</div>
+          <div onClick={() => filterApply('family')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${family && all ? "bg-gray-200  scale-105" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-red-600 rounded-full'> </p>family</div>
+          <div onClick={() => filterApply('all')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 rounded-3xl ${!all ? "bg-gray-200  scale-105" : ""}`}><p className='inline-block w-8 h-8 bg-gray-600 rounded-full'> </p>All</div>
+          <div onClick={() => filterApply('done')} className={`selection:bg-none cursor-pointer flex items-center gap-2 py-2 px-2 ${done && all ? "bg-gray-200  scale-105" : ""} rounded-3xl`}><p className='inline-block w-8 h-8 bg-green-500 rounded-full'> </p>Done</div>
         </div>
         <div className='selection:bg-none cursor-pointer flex gap-3 justify-center items-center bottom-8 left-10 fixed'>
           <img className='text-center w-[3rem]' src="./public/man_4140048.png" alt="Profile" />
@@ -196,7 +196,7 @@ function Home({ data, setData }) {
                 <p title='study' className={`selection:bg-none cursor-pointer w-8 h-8 bg-sky-300 rounded-full ${item.study ? "" : "hidden"}`}></p>
                 <p title='entertainment' className={`selection:bg-none cursor-pointer w-8 h-8 bg-pink-300 rounded-full ${item.entertainment ? "" : "hidden"}`}></p>
                 <p title='family' className={`selection:bg-none cursor-pointer w-8 h-8 bg-red-600 rounded-full ${item.family ? "" : "hidden"}`}></p>
-              </div>
+              </div>  
               <div>
               {item.deadline ? new Date(item.deadline).toLocaleString() : "N/A"}
               </div>
