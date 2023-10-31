@@ -145,7 +145,7 @@ function Home({ data, setData }) {
       (study && item.study && !item.checked) ||
       (entertainment && item.entertainment && !item.checked) ||
       (family && item.family && !item.checked) ||
-      (done && item.checked) 
+      (done && item.checked) ||(data)
     );
   });
 

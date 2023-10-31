@@ -28,7 +28,7 @@ function AddList({ setData, toggleTodos }) {
                 work: work,
                 study: study,
                 entertainment: entertainment,
-                family: family
+                family: family,
             };
 
             // Update the parent component's data
