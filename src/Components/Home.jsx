@@ -166,7 +166,7 @@ function Home({ data, setData }) {
         </div>
         <div className='selection:bg-none cursor-pointer flex gap-3 justify-center items-center bottom-8 left-10 fixed'>
           <img className='text-center w-[3rem]' src="./man_4140048.png" alt="Profile" />
-          <h1 className='text-xl font-semibold'>User1234</h1>
+          <h1 className='text-xl font-semibold'>Manua420</h1>
         </div>
       </div>
       <div className="flex flex-wrap w-[100%] mt-[60px] gap-4 pl-4 overflow-y-auto flex-grow">

@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [todos, setTodos] = useState(false);
+  const [leng,setleng]=useState('')
   const toggleTodos = () => {
     setTodos(!todos);
   };
@@ -17,8 +18,9 @@ function App() {
 
   useEffect(() => {
     setTodos(true)
-    if (data.length > 0) {
-      toast.success('Updated Todo Successfully')
+    if (data.length > leng) {
+      toast.success('Added Todo Successfully')
+      setleng(data.length)
     }
   }, [data.length])
 

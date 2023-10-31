@@ -1,26 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from 'react-toastify';
 
 function AddList({ setData, toggleTodos }) {
-    const [selectedDate, setSelectedDate] = React.useState(null);
-    const [work, setWork] = React.useState(false);
-    const [study, setStudy] = React.useState(false);
-    const [entertainment, setEntertainment] = React.useState(false);
-    const [family, setFamily] = React.useState(false);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [work, setWork] = useState(false);
+    const [study, setStudy] = useState(false);
+    const [entertainment, setEntertainment] = useState(false);
+    const [family, setFamily] = useState(false);
+    const [title, setTitle] = useState(''); // Initialize title state with an empty string
+    const [description, setDescription] = useState(''); // Initialize description state with an empty string
 
     function submitHandler(e) {
         e.preventDefault();
-        const title = e.target.title.value;
-        const description = e.target.description.value;
+        const newTitle = title; // Get title from the state
+        const newDescription = description; // Get description from the state
         const deadline = selectedDate;
 
-        if (title && description ) {
+        if (newTitle && newDescription ) {
             const newData = {
                 id: Math.random(),
-                title: title,
-                description: description,
+                title: newTitle, // Use the newTitle from the state
+                description: newDescription, // Use the newDescription from the state
                 deadline: deadline,
                 checked: false,
                 work: work,
@@ -31,11 +33,17 @@ function AddList({ setData, toggleTodos }) {
 
             // Update the parent component's data
             setData((prevData) => [...prevData, newData]);
-            toggleTodos()
-        }else{
-            toast.warn('Please fill in all fields.')
+            toggleTodos();
+
+            // Clear input fields after submitting
+            setTitle('');
+            setDescription('');
+            setSelectedDate(null);
+        } else {
+            toast.warn('Please fill in all fields.');
         }
     }
+
     function Filter(value) {
         // Determine which filter to toggle based on the provided value
         switch (value) {
@@ -67,6 +75,8 @@ function AddList({ setData, toggleTodos }) {
                         name='title'
                         placeholder='Enter the Title'
                         className='text-3xl p-1 rounded-lg'
+                        value={title} // Bind the input value to the title state
+                        onChange={(e) => setTitle(e.target.value)} // Update the title state
                     />
                     <DatePicker
                         selected={selectedDate}
@@ -83,6 +93,8 @@ function AddList({ setData, toggleTodos }) {
                         name='description'
                         placeholder='Enter the Description...'
                         className='text-xl w-full h-[150px] px-2 rounded-lg'
+                        value={description} // Bind the input value to the description state
+                        onChange={(e) => setDescription(e.target.value)} // Update the description state
                     />
                 </div>
                 <div className="flex gap-4 justify-center mb-4">
@@ -92,12 +104,12 @@ function AddList({ setData, toggleTodos }) {
                     <p onClick={() => Filter('family')} className={`cursor-pointer w-8 h-8 bg-red-600 ${family ? 'border-[2px] border-black' : ''} rounded-full`}></p>
                 </div>
                 <div className='flex justify-center'>
-                <button
-                    type='submit'
-                    className='w-[30%] text-center text-xl h-10 text-white bg-sky-500 rounded hover:bg-sky-600 focus:outline-none focus:ring'
-                >
-                    Add Todo
-                </button>
+                    <button
+                        type='submit'
+                        className='w-[30%] text-center text-xl h-10 text-white bg-sky-500 rounded hover:bg-sky-600 focus:outline-none focus:ring'
+                    >
+                        Add Todo
+                    </button>
                 </div>
             </form>
         </div>
